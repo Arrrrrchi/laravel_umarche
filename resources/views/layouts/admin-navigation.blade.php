@@ -5,9 +5,11 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
+                    <div class="w-12">
                     <a href="{{ route('admin.dashboard') }}">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
+                    </div>
                 </div>
 
                 <!-- Navigation Links -->
@@ -15,6 +17,10 @@
                     <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.owners.index')" :active="request()->routeIs('admin.owvers.index')">
+                        オーナー管理
+                    </x-nav-link>
+
                 </div>
             </div>
 
