@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Image;
 use App\Models\Product;
-use App\Models\SecondaryCategory;
+use App\Models\PrimaryCategory;
 use App\Models\Owner;
+use App\Models\Shop;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -46,14 +47,21 @@ class ProductController extends Controller
         return view('owner.products.index', compact('ownerInfo'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $shops = Shop::where('owner_id', Auth::id())
+            ->select('id', 'name')
+            ->get();
+
+        $images = Image::where('owner_id', Auth::id())
+            ->select('id', 'title', 'filename')
+            ->orderby('updated_at', 'desc')
+            ->get();
+
+        $categories = PrimaryCategory::with('secondary')
+            ->get();
+
+        return view('owner.products.create', compact('shops', 'images', 'categories'));
     }
 
     /**
