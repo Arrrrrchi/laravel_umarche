@@ -11,9 +11,12 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <!-- バリデーションエラー -->
                     <x-auth-validation-errors class="mb-4 text-center" :errors="$errors" />
-
+                    <!-- フラッシュメッセージ -->
+                    <x-flash-message status="session('status')" />
+                    
                     <form action="{{ route('owner.products.update', ['product' => $product->id ]) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="-m-2">
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">

@@ -156,7 +156,8 @@ return [
     'attributes' => [
         'name' => '名前',
         'password' => 'パスワード',
-        'email' => 'メールアドレス'
+        'email' => 'メールアドレス',
+        'quantity' => '数量',
     ],
 
 ];
