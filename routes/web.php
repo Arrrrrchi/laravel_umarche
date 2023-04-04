@@ -19,9 +19,11 @@ Route::get('/', function () {
     return view('user.welcome');
 });
 
-Route::middleware('auth:users')
+Route::prefix('user')
+    ->middleware('auth:users')
     ->group(function () {
         Route::get('/', [ItemController::class, 'index'])->name('items.index');
+        Route::get('show/{item}', [ItemController::class, 'show'])->name('items.show');
     });
 
 // Route::get('/dashboard', function () {
