@@ -147,6 +147,10 @@
   .micromodal-slide .modal__overlay {
     will-change: transform;
   }
+.swiper-container {
+    /* width: 600px; */
+    height: 300px;
+  }
 /*
 ! tailwindcss v3.2.7 | MIT License | https://tailwindcss.com
 */
@@ -997,9 +1001,6 @@ select{
 }
 .flex-wrap{
   flex-wrap: wrap;
-}
-.items-end{
-  align-items: flex-end;
 }
 .items-center{
   align-items: center;
