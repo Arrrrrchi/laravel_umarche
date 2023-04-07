@@ -6,10 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Stock;
-use App\Mail\TestMail;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use App\Models\PrimaryCategory;
+use App\Jobs\SendThanksMail;
 
 
 
@@ -34,7 +33,8 @@ class ItemController extends Controller
 
     public function index(Request $request)
     {
-        Mail::to('test@example.com')->send(new TestMail());
+        // 非同期にメールを送信
+        SendThanksMail::dispatch();
 
         $products = Product::availableItems()  // availableItems()はApp\Models\Productに記載
             ->selectCategory($request->category ?? '0')
