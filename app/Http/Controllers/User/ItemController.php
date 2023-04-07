@@ -33,8 +33,8 @@ class ItemController extends Controller
 
     public function index(Request $request)
     {
-        // 非同期にメールを送信
-        SendThanksMail::dispatch();
+        // // 非同期にメールを送信
+        // SendThanksMail::dispatch();
 
         $products = Product::availableItems()  // availableItems()はApp\Models\Productに記載
             ->selectCategory($request->category ?? '0')

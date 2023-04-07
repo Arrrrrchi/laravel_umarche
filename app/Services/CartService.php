@@ -26,15 +26,10 @@ class CartService
             $quantity = Cart::where('product_id', $item->product_id)
                         ->select('quantity')->get()->toArray(); // 在庫数の配列
 
-            // dd($ownerInfo, $product, $quantity);
-            
             $result = array_merge($product[0], $ownerInfo, $quantity[0]); // 配列の結合
-
-            // dd($result);
 
             array_push($products, $result);
         }
-        dd($products);
         return $products;
     }
 }
