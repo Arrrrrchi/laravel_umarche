@@ -31,7 +31,7 @@ class ItemController extends Controller
     public function index(Request $request) {
         $products = Product::availableItems()  // availableItems()はApp\Models\Productに記載
             ->sortOrder($request->sort)
-            ->get();
+            ->paginate($request->pagination);
         
         return view('user.index', compact('products'));
     }
