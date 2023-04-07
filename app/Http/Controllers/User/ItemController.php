@@ -28,8 +28,10 @@ class ItemController extends Controller
     }
 
 
-    public function index() {
-        $products = Product::availableItems()->get(); // availableItems()はApp\Models\Productに記載
+    public function index(Request $request) {
+        $products = Product::availableItems()  // availableItems()はApp\Models\Productに記載
+            ->sortOrder($request->sort)
+            ->get();
         
         return view('user.index', compact('products'));
     }
