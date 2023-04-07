@@ -71,6 +71,9 @@ class Product extends Model
         return $this->belongsToMany(User::class, 'carts')->withPivot(['id', 'quantity']);
     }
 
+    /* 標準のクエリスコープ
+        ・・・商品の販売数が１以上で、ショップと商品の販売状態が販売中(true)
+    */
     public function scopeAvailableItems ($query) {
         $stocks = DB::table('t_stocks')
         ->select('product_id', DB::raw('sum(quantity) as quantity'))
@@ -89,6 +92,7 @@ class Product extends Model
                 ,'products.information', 'secondary_categories.name as category' ,'image1.filename as filename');
     }
 
+    /* 表示順のクエリスコープ */
     public function scopeSortOrder($query, $sortOrder) {
         if($sortOrder === null || $sortOrder === \Constant::SORT_ORDER['recommend']){
             return $query->orderBy('sort_order', 'asc'); 
@@ -107,6 +111,7 @@ class Product extends Model
         }
     }
 
+    /* カテゴリー検索のクエリスコープ */
     public function scopeSelectCategory($query, $categoryId) {
         if($categoryId !== '0') {
             return $query->where('secondary_category_id', $categoryId);
